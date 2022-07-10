@@ -1,0 +1,4 @@
+# https://developers.home-assistant.io/docs/add-ons/repository#repository-configuration
+name: Jellyfin Server add-on repository
+url: "https://github.com/mdvorak/ha-addon-jellyfin"
+maintainer: Michal Dvorak <mikee2185@gmail.com>
