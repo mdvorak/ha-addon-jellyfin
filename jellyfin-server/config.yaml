@@ -19,5 +19,7 @@ map:
 watchdog: "http://[HOST]:8096/health"
 ports:
   8096/tcp: 8096
+  8920/tcp: null
 ports_description:
   8096/tcp: Jellyfin web and media port
+  8920/tcp: Jellyfin TLS port, must be configured in the server first
