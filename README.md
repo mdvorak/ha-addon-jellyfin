@@ -8,3 +8,4 @@ This repository contains the following add-ons
 
 ### [Jellyfin Server](./jellyfin-server)
 
+_This add-on installs the [Jellyfin](https://jellyfin.org/) server._
