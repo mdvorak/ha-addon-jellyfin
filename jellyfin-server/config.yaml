@@ -1,9 +1,8 @@
-# https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
 name: Jellyfin Server
-version: "1.0.0"
+version: 1.0.1
 slug: jellyfinserver
 description: Jellyfin Server add-on
-url: "https://github.com/mdvorak/ha-addon-jellyfin"
+url: https://github.com/mdvorak/ha-addon-jellyfin
 webui: http://[HOST]:[PORT:8096]
 stage: experimental
 arch:
@@ -17,7 +16,7 @@ map:
   - share:rw
   - media:rw
   - ssl
-watchdog: "http://[HOST]:8096/health"
+watchdog: http://[HOST]:8096/health
 ports:
   8096/tcp: 8096
   8920/tcp: null
