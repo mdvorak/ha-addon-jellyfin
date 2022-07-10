@@ -3,7 +3,7 @@ name: Jellyfin Server
 version: "1.0.0"
 slug: jellyfinserver
 description: Jellyfin Server add-on
-url: "https://jellyfin.org"
+url: "https://github.com/mdvorak/ha-addon-jellyfin"
 stage: experimental
 arch:
   - aarch64
