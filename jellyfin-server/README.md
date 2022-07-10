@@ -10,7 +10,7 @@
 [armhf-shield]: https://img.shields.io/badge/armhf-yes-green.svg
 [armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
 
-This [Home Assistant](https://www.home-assistant.io/addons/) installs the actual 
+This [Home Assistant](https://www.home-assistant.io/addons/) add-on installs the 
 [Jellyfin](https://jellyfin.org/) server. It does not provide any integrations.
 
 Server is exposed on port `8096`.
