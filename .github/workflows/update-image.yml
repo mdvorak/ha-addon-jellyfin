@@ -1,0 +1,46 @@
+name: Update Image
+
+on:
+  push:
+    branches:
+      - '**'
+  workflow_dispatch:
+
+jobs:
+  update-image:
+    name: Update image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Read image
+        id: image
+        run: |-
+          FROM=$(grep FROM ./Dockerfile | cut -d' ' -f2)
+          echo "::set-output name=from::$FROM"
+          echo "::notice title=Image::$FROM"
+
+      - name: Update image
+        run: |-
+          yq -i '.build_from[] = strenv(FROM)' jellyfin-server/build.yaml
+        env:
+          FROM: ${{ steps.image.outputs.from }}
+
+      - name: Commit to Dependabot branch
+        if: ${{ startsWith(github.ref_name, 'dependabot') }}
+        uses: EndBug/add-and-commit@v9 # You can change this to use a specific version.
+        with:
+          add: jellyfin-server/
+          message: "fix(deps): update image to ${{ steps.image.outputs.from }}"
+
+      - name: Create Pull Request
+        if: ${{ !startsWith(github.ref_name, 'dependabot') }}
+        uses: peter-evans/create-pull-request@v4
+        with:
+          title: "fix(deps): update image to ${{ steps.image.outputs.from }} on ${{ github.ref_name }}"
+          commit-message: "fix(deps): update image to ${{ steps.image.outputs.from }}"
+          body: "Updated jellyfin-server/build.yaml from the Dockerfile"
+          branch: jellyfin--${{ github.ref_name }}
+          delete-branch: true
+          labels: dependencies,docker
