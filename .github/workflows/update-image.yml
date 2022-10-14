@@ -35,7 +35,7 @@ jobs:
         uses: EndBug/add-and-commit@v9 # You can change this to use a specific version.
         with:
           add: jellyfin-server/
-          message: "fix(deps): update image to ${{ steps.image.outputs.from }}"
+          message: "chore(deps): update image to ${{ steps.image.outputs.from }}"
 
       - name: Create Pull Request
         if: ${{ !startsWith(github.ref_name, 'dependabot') }}
