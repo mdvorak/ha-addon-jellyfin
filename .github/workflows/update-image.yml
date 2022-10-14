@@ -41,8 +41,8 @@ jobs:
         if: ${{ !startsWith(github.ref_name, 'dependabot') }}
         uses: peter-evans/create-pull-request@v4
         with:
-          title: "fix(deps): update image to ${{ steps.image.outputs.from }} on ${{ github.ref_name }}"
-          commit-message: "fix(deps): update image to ${{ steps.image.outputs.from }}"
+          title: "chore(deps): update image to ${{ steps.image.outputs.from }} on ${{ github.ref_name }}"
+          commit-message: "chore(deps): update image to ${{ steps.image.outputs.from }}"
           body: "Updated jellyfin-server/build.yaml from the Dockerfile"
           branch: jellyfin--${{ github.ref_name }}
           delete-branch: true
