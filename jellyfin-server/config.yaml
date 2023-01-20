@@ -5,8 +5,9 @@ description: Jellyfin Server add-on
 url: https://github.com/mdvorak/ha-addon-jellyfin
 webui: http://[HOST]:[PORT:8096]
 arch:
-  - armv7
   - amd64
+  - armv7
+  - arm64
 init: false
 map:
   - config:rw
