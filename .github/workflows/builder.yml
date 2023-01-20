@@ -18,7 +18,11 @@ jobs:
       fail-fast: false
       matrix:
         addon: ["jellyfin-server"]
-        arch: ["amd64", "armv7", "arm64"]
+        arch:
+          - aarch64
+          - armhf
+          - armv7
+          - amd64
 
     steps:
       - name: Check out repository
