@@ -1,6 +1,7 @@
 # https://github.com/googleapis/repo-automation-bots/tree/main/packages/release-please#configuration
 handleGHRelease: true
 releaseType: simple
+changelogPath: jellyfin-server/CHANGELOG.md
 extraFiles:
   - path: jellyfin-server/config.yaml
     type: yaml
