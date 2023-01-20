@@ -14,6 +14,7 @@ map:
   - share:rw
   - media:rw
   - ssl
+video: true
 watchdog: http://[HOST]:8096/health
 ports:
   8096/tcp: 8096
