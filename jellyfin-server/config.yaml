@@ -6,8 +6,6 @@ url: https://github.com/mdvorak/ha-addon-jellyfin
 webui: http://[HOST]:[PORT:8096]
 stage: experimental
 arch:
-  - aarch64
-  - armhf
   - armv7
   - amd64
 init: false
@@ -23,3 +21,4 @@ ports:
 ports_description:
   8096/tcp: Jellyfin web and media port
   8920/tcp: Jellyfin TLS port, must be configured in the server first
+image: ghcr.io/mdvorak/jellyfin-server-{arch}
