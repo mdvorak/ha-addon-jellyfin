@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.1.0](https://github.com/mdvorak/ha-addon-jellyfin/compare/v1.0.6...v1.1.0) (2023-01-20)
+
+
+### Features
+
+* add video: true flag ([#31](https://github.com/mdvorak/ha-addon-jellyfin/issues/31)) ([e529481](https://github.com/mdvorak/ha-addon-jellyfin/commit/e529481684e1144c804342a1337aa050beebaf01))
+* added pre-built images ([bbe88b1](https://github.com/mdvorak/ha-addon-jellyfin/commit/bbe88b16ca5ac0ea20d420cd3ee4cb80c0d7a9ac))
+
+
+### Bug Fixes
+
+* removed unsupported armhf arch ([bbe88b1](https://github.com/mdvorak/ha-addon-jellyfin/commit/bbe88b16ca5ac0ea20d420cd3ee4cb80c0d7a9ac))
+
 ## [1.0.6](https://github.com/mdvorak/ha-addon-jellyfin/compare/v1.0.5...v1.0.6) (2022-11-30)
 
 
