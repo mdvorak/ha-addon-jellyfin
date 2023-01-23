@@ -5,6 +5,7 @@ FROM $BUILD_FROM
 ENV JELLYFIN_DATA_DIR=/share/jellyfin
 ENV JELLYFIN_CONFIG_DIR=/share/jellyfin/config
 ENV JELLYFIN_CACHE_DIR=/share/jellyfin/cache
+ENV JELLYFIN_LOG_DIR=/share/jellyfin/log
 
 # Override original entrypoint
 ENTRYPOINT ["./jellyfin/jellyfin"]
