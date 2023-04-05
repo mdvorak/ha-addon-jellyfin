@@ -39,7 +39,7 @@ jobs:
 
       - name: Create Pull Request
         if: ${{ !startsWith(github.ref_name, 'dependabot') }}
-        uses: peter-evans/create-pull-request@v4
+        uses: peter-evans/create-pull-request@v5
         with:
           title: "chore(deps): update image to ${{ steps.image.outputs.from }} on ${{ github.ref_name }}"
           commit-message: "chore(deps): update image to ${{ steps.image.outputs.from }}"
