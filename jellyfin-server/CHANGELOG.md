@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.3](https://github.com/mdvorak/ha-addon-jellyfin/compare/v1.1.2...v1.1.3) (2023-11-29)
+
+
+### Bug Fixes
+
+* **deps:** bump jellyfin/jellyfin from 10.8.10 to 10.8.13 ([#57](https://github.com/mdvorak/ha-addon-jellyfin/issues/57)) ([1046e36](https://github.com/mdvorak/ha-addon-jellyfin/commit/1046e3688c8174d7d97723fa5c77269b016eb814))
+* remove watchdog config ([#55](https://github.com/mdvorak/ha-addon-jellyfin/issues/55)) ([0bebf8c](https://github.com/mdvorak/ha-addon-jellyfin/commit/0bebf8c43b0f6d86beba4ee3c332c078d636b6e6))
+
 ## [1.1.2](https://github.com/mdvorak/ha-addon-jellyfin/compare/v1.1.1...v1.1.2) (2023-04-23)
 
 
