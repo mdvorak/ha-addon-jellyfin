@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/mdvorak/ha-addon-jellyfin/compare/v1.1.4...v1.2.0) (2024-03-27)
+
+
+### Features
+
+* add additional variant with host_network=true ([b1b6a80](https://github.com/mdvorak/ha-addon-jellyfin/commit/b1b6a806f6842b576b052045da4067e546509bf5))
+
 ## [1.1.4](https://github.com/mdvorak/ha-addon-jellyfin/compare/v1.1.3...v1.1.4) (2023-11-30)
 
 
