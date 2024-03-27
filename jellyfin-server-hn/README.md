@@ -1,4 +1,4 @@
-# Jellyfin Server Add-on
+# Jellyfin Server (Host-Network) Add-on
 
 ![Supports amd64 Architecture][amd64-shield]
 ![Supports armv7 Architecture][armv7-shield]
@@ -10,7 +10,9 @@
 [armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
 
 This [Home Assistant](https://www.home-assistant.io/addons/) add-on installs the
-[Jellyfin](https://jellyfin.org/) server.
+[Jellyfin](https://jellyfin.org/) server. 
+
+:warning: This version runs on **host network**, which enables DLNA and other broadcasts, but lowers overall security.
 
 Server is exposed on port `8096`, and must be accessed directly.
 

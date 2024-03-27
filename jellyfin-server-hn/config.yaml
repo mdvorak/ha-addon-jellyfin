@@ -1,0 +1,25 @@
+name: Jellyfin Server (Host Network)
+version: 1.1.4
+slug: jellyfinserverhn
+description: Jellyfin Server add-on, running on host network
+url: https://github.com/mdvorak/ha-addon-jellyfin
+webui: http://[HOST]:[PORT:8096]
+arch:
+  - aarch64
+  - armv7
+  - amd64
+init: false
+map:
+  - config:rw
+  - share:rw
+  - media:rw
+  - ssl
+video: true
+ports:
+  8096/tcp: 8096
+  8920/tcp: null
+ports_description:
+  8096/tcp: Jellyfin web and media port
+  8920/tcp: Jellyfin TLS port, must be configured in the server first
+host_network: true
+image: ghcr.io/mdvorak/jellyfin-server-{arch}
