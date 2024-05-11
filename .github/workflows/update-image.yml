@@ -30,15 +30,7 @@ jobs:
         env:
           FROM: ${{ steps.image.outputs.from }}
 
-      - name: Commit to Dependabot branch
-        if: ${{ startsWith(github.ref_name, 'dependabot') }}
-        uses: EndBug/add-and-commit@v9 # You can change this to use a specific version.
-        with:
-          add: jellyfin-server/
-          message: "chore(deps): update image to ${{ steps.image.outputs.from }}"
-
       - name: Create Pull Request
-        if: ${{ !startsWith(github.ref_name, 'dependabot') }}
         uses: peter-evans/create-pull-request@v6
         with:
           title: "chore(deps): update image to ${{ steps.image.outputs.from }} on ${{ github.ref_name }}"
