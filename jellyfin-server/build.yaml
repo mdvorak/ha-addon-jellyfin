@@ -1,4 +1,4 @@
 build_from:
-  aarch64: "jellyfin/jellyfin:10.9.0.20240511-182735"
-  armv7: "jellyfin/jellyfin:10.9.0.20240511-182735"
-  amd64: "jellyfin/jellyfin:10.9.0.20240511-182735"
+  aarch64: "jellyfin/jellyfin:10.9.0"
+  armv7: "jellyfin/jellyfin:10.9.0"
+  amd64: "jellyfin/jellyfin:10.9.0"
