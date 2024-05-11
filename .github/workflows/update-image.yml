@@ -27,6 +27,7 @@ jobs:
       - name: Update image
         run: |-
           yq -i '.build_from[] = strenv(FROM)' jellyfin-server/build.yaml
+          yq -i '.build_from[] = strenv(FROM)' jellyfin-server-hn/build.yaml
         env:
           FROM: ${{ steps.image.outputs.from }}
 
@@ -34,7 +35,7 @@ jobs:
         if: ${{ startsWith(github.ref_name, 'dependabot') }}
         uses: EndBug/add-and-commit@v9 # You can change this to use a specific version.
         with:
-          add: jellyfin-server/
+          add: jellyfin-server/ jellyfin-server-hn/
           message: "chore(deps): update image to ${{ steps.image.outputs.from }}"
 
       - name: Create Pull Request
