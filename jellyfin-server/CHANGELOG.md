@@ -5,7 +5,7 @@
 
 ### Features
 
-* **deps:** bump jellyfin/jellyfin from 10.8.13-1 to 10.9.0.20240511-182735 ([3edabb9](https://github.com/mdvorak/ha-addon-jellyfin/commit/3edabb9ca7be0255ccef31fd10d280be09f370b5))
+* **deps:** bump jellyfin/jellyfin from 10.8.13-1 to 10.9.0 ([3edabb9](https://github.com/mdvorak/ha-addon-jellyfin/commit/3edabb9ca7be0255ccef31fd10d280be09f370b5))
 
 
 ### Bug Fixes
