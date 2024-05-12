@@ -1,5 +1,5 @@
 name: Jellyfin Server (Host Network)
-version: 1.2.0
+version: 1.3.0
 slug: jellyfinserverhn
 description: Jellyfin Server add-on, running on host network
 url: https://github.com/mdvorak/ha-addon-jellyfin

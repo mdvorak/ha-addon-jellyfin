@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.3.0](https://github.com/mdvorak/ha-addon-jellyfin/compare/v1.2.0...v1.3.0) (2024-05-12)
+
+
+### Features
+
+* **deps:** bump jellyfin/jellyfin from 10.8.13-1 to 10.9.0 ([3edabb9](https://github.com/mdvorak/ha-addon-jellyfin/commit/3edabb9ca7be0255ccef31fd10d280be09f370b5))
+
+
+### Bug Fixes
+
+* mount addon_config instead of config ([#75](https://github.com/mdvorak/ha-addon-jellyfin/issues/75)) ([6f10918](https://github.com/mdvorak/ha-addon-jellyfin/commit/6f10918bc2d041a03f5b663ce6f9bbcaab958ab7))
+
 ## [1.2.0](https://github.com/mdvorak/ha-addon-jellyfin/compare/v1.1.4...v1.2.0) (2024-03-27)
 
 
