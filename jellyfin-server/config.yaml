@@ -10,7 +10,7 @@ arch:
   - amd64
 init: false
 map:
-  - config:rw
+  - addon_config:rw
   - share:rw
   - media:rw
   - ssl
