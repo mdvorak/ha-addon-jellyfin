@@ -1,9 +1,7 @@
 name: Check Image
 
 on:
-  push:
-    branches:
-      - '**'
+  pull_request:
   workflow_dispatch:
 
 jobs:
@@ -25,7 +23,7 @@ jobs:
 
       - name: Check image
         run: |-
-          current = $(yq '.build_from | to_entries | .[0].value' jellyfin-server/build.yaml)
-          [ $current != $FROM ] & exit 1
+          CURRENT=$(yq '.build_from | to_entries | .[0].value' jellyfin-server/build.yaml)
+          [ $CURRENT != $FROM ] & exit 1
         env:
           FROM: ${{ steps.image.outputs.from }}
