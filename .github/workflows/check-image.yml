@@ -24,6 +24,8 @@ jobs:
       - name: Check image
         run: |-
           CURRENT=$(yq '.build_from | to_entries | .[0].value' jellyfin-server/build.yaml)
-          [ $CURRENT != $FROM ] & exit 1
+          echo "FROM=$FROM"
+          echo "CURRENT=$CURRENT"
+          [ $CURRENT != $FROM ] & exit 2
         env:
           FROM: ${{ steps.image.outputs.from }}
