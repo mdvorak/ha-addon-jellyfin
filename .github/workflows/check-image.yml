@@ -6,7 +6,7 @@ on:
 
 jobs:
   update-image:
-    name: Update image
+    name: Check image
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -18,7 +18,7 @@ jobs:
         id: image
         run: |-
           FROM=$(grep FROM ./Dockerfile | cut -d' ' -f2)
-          echo "::set-output name=from::$FROM"
+          echo "from=$FROM" >> $GITHUB_OUTPUT
           echo "::notice title=Image::$FROM"
 
       - name: Check image
