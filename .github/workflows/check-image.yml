@@ -1,0 +1,31 @@
+name: Check Image
+
+on:
+  push:
+    branches:
+      - '**'
+  workflow_dispatch:
+
+jobs:
+  update-image:
+    name: Update image
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Read image
+        id: image
+        run: |-
+          FROM=$(grep FROM ./Dockerfile | cut -d' ' -f2)
+          echo "::set-output name=from::$FROM"
+          echo "::notice title=Image::$FROM"
+
+      - name: Check image
+        run: |-
+          current = $(yq '.build_from | to_entries | .[0].value' jellyfin-server/build.yaml)
+          [ $current != $FROM ] & exit 1
+        env:
+          FROM: ${{ steps.image.outputs.from }}
