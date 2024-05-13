@@ -21,7 +21,7 @@ jobs:
         id: image
         run: |-
           FROM=$(grep FROM ./Dockerfile | cut -d' ' -f2)
-          echo "::set-output name=from::$FROM"
+          echo "from=$FROM" >> $GITHUB_OUTPUT
           echo "::notice title=Image::$FROM"
 
       - name: Update image

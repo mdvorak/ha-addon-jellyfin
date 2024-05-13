@@ -1,0 +1,33 @@
+name: Check Image
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  update-image:
+    name: Check image
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Read image
+        id: image
+        run: |-
+          FROM=$(grep FROM ./Dockerfile | cut -d' ' -f2)
+          echo "from=$FROM" >> $GITHUB_OUTPUT
+          echo "::notice title=Expected Image::$FROM"
+
+      - name: Check image
+        run: |-
+          CURRENT=$(yq '.build_from | to_entries | .[0].value' jellyfin-server/build.yaml)
+          echo "FROM   =$FROM"
+          echo "CURRENT=$CURRENT"
+          
+          echo "::notice title=Used Image::$CURRENT"
+          [ $CURRENT == $FROM ] || exit 2
+        env:
+          FROM: ${{ steps.image.outputs.from }}
