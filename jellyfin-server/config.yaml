@@ -1,5 +1,5 @@
 name: Jellyfin Server
-version: 1.3.4
+version: 1.3.5
 slug: jellyfinserver
 description: Jellyfin Server add-on
 url: https://github.com/mdvorak/ha-addon-jellyfin
