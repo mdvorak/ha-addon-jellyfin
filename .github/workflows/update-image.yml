@@ -31,7 +31,7 @@ jobs:
           FROM: ${{ steps.image.outputs.from }}
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v7
         with:
           title: "chore(deps): update image to ${{ steps.image.outputs.from }} on ${{ github.ref_name }}"
           commit-message: "chore(deps): update image to ${{ steps.image.outputs.from }}"
