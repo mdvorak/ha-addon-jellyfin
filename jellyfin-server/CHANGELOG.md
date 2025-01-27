@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.5](https://github.com/mdvorak/ha-addon-jellyfin/compare/v1.4.4...v1.4.5) (2025-01-27)
+
+
+### Bug Fixes
+
+* **deps:** bump jellyfin/jellyfin from 10.10.4 to 10.10.5 ([4471e51](https://github.com/mdvorak/ha-addon-jellyfin/commit/4471e51f7d71d7a41cc3039f87a0a761b521497a))
+
 ## [1.4.4](https://github.com/mdvorak/ha-addon-jellyfin/compare/v1.4.3...v1.4.4) (2025-01-23)
 
 
