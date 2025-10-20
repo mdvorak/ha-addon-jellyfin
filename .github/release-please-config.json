@@ -1,0 +1,16 @@
+{
+  "always-update": true,
+  "include-component-in-tag": false,
+  "extraFiles": [
+    {
+      "path": "jellyfin-server/config.yaml",
+      "type": "yaml",
+      "jsonpath": "$.version"
+    },
+    {
+      "path": "jellyfin-server-hn/config.yaml",
+      "type": "yaml",
+      "jsonpath": "$.version"
+    }
+  ]
+}
