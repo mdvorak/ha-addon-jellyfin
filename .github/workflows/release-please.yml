@@ -22,3 +22,4 @@ jobs:
       - uses: googleapis/release-please-action@v4
         with:
           token: ${{ secrets.RELEASE_GITHUB_TOKEN }}
+          config-file: .github/release-please-config.json
