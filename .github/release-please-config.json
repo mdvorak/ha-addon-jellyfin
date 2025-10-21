@@ -3,19 +3,19 @@
   "include-component-in-tag": false,
   "packages": {
     ".": {
-      "release-type": "simple"
+      "release-type": "simple",
+      "extraFiles": [
+        {
+          "path": "jellyfin-server/config.yaml",
+          "type": "yaml",
+          "jsonpath": "$.version"
+        },
+        {
+          "path": "jellyfin-server-hn/config.yaml",
+          "type": "yaml",
+          "jsonpath": "$.version"
+        }
+      ]
     }
-  },
-  "extraFiles": [
-    {
-      "path": "jellyfin-server/config.yaml",
-      "type": "yaml",
-      "jsonpath": "$.version"
-    },
-    {
-      "path": "jellyfin-server-hn/config.yaml",
-      "type": "yaml",
-      "jsonpath": "$.version"
-    }
-  ]
+  }
 }
