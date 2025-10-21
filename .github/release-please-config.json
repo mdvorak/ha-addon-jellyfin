@@ -4,6 +4,7 @@
   "packages": {
     ".": {
       "release-type": "simple",
+      "changelog-path": "jellyfin-server/CHANGELOG.md",
       "extra-files": [
         {
           "path": "jellyfin-server/config.yaml",
