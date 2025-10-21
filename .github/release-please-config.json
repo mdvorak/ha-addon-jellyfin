@@ -4,7 +4,7 @@
   "packages": {
     ".": {
       "release-type": "simple",
-      "extraFiles": [
+      "extra-files": [
         {
           "path": "jellyfin-server/config.yaml",
           "type": "yaml",
