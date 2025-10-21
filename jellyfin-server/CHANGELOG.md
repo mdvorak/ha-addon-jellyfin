@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/mdvorak/ha-addon-jellyfin/compare/v2.0.0...v2.0.1) (2025-10-21)
+
+
+### Bug Fixes
+
+* fixed release config ([6f1e5ac](https://github.com/mdvorak/ha-addon-jellyfin/commit/6f1e5ac02bbe788de360a56e1d3e319ea4102ca3))
+
 ## [1.4.6](https://github.com/mdvorak/ha-addon-jellyfin/compare/v1.4.5...v1.4.6) (2025-04-06)
 
 
