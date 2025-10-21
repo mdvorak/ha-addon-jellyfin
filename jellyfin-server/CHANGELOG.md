@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.0.1](https://github.com/mdvorak/ha-addon-jellyfin/compare/v2.0.0...v2.0.1) (2025-10-21)
+
+### ⚠ BREAKING CHANGES
+
+- Read https://jellyfin.org/posts/jellyfin-release-10.11.0/ before upgrading!
+- See changelog https://github.com/jellyfin/jellyfin/releases/tag/v10.11.0
+- Dropped support for `armv7` (or `armhf`) architecture (it won't be supported by Jellyfin anymore)
+
+### Features
+
+* **deps:** bump jellyfin/jellyfin from 10.10.7 to 10.11.0 ([#150](https://github.com/mdvorak/ha-addon-jellyfin/issues/150)) ([fd03aef](https://github.com/mdvorak/ha-addon-jellyfin/commit/fd03aeff7c460ef50209dcfceaf7ff6df1afe479))
+
+### Bug Fixes
+
+* fixed release config ([6f1e5ac](https://github.com/mdvorak/ha-addon-jellyfin/commit/6f1e5ac02bbe788de360a56e1d3e319ea4102ca3))
+
 ## [1.4.6](https://github.com/mdvorak/ha-addon-jellyfin/compare/v1.4.5...v1.4.6) (2025-04-06)
 
 
