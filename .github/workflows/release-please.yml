@@ -19,7 +19,77 @@ jobs:
     runs-on: ubuntu-latest
     environment: release
     steps:
-      - uses: googleapis/release-please-action@v4
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.RELEASE_GITHUB_TOKEN }}
+
+      - name: Run release-please
+        id: release
+        uses: googleapis/release-please-action@v4
         with:
           token: ${{ secrets.RELEASE_GITHUB_TOKEN }}
           config-file: .github/release-please-config.json
+
+      - name: Append Jellyfin release notes to PR
+        if: steps.release.outputs.pr != ''
+        env:
+          GH_TOKEN: ${{ secrets.RELEASE_GITHUB_TOKEN }}
+          PR_NUMBER: ${{ fromJSON(steps.release.outputs.pr).number }}
+        run: |
+          # Current Jellyfin version in Dockerfile
+          CURRENT=$(grep -m1 '^FROM jellyfin/jellyfin:' jellyfin-server/Dockerfile | cut -d: -f2)
+
+          # Version at the last release tag
+          LAST_TAG=$(git tag --sort=-version:refname | grep '^v' | head -1)
+          if [[ -n "$LAST_TAG" ]]; then
+            PREVIOUS=$(git show "${LAST_TAG}:jellyfin-server/Dockerfile" 2>/dev/null \
+              | grep -m1 '^FROM jellyfin/jellyfin:' | cut -d: -f2 || echo "")
+          else
+            PREVIOUS=""
+          fi
+
+          if [[ "$CURRENT" == "$PREVIOUS" ]] || [[ -z "$CURRENT" ]]; then
+            echo "Jellyfin version unchanged ($CURRENT), skipping"
+            exit 0
+          fi
+
+          echo "Jellyfin version changed: ${PREVIOUS:-none} -> $CURRENT"
+
+          # All Jellyfin versions sorted ascending
+          ALL_VERSIONS=$(gh api repos/jellyfin/jellyfin/releases --paginate \
+            --jq '.[].tag_name | ltrimstr("v")' | sort -V)
+
+          # Collect versions in range (PREVIOUS exclusive, CURRENT inclusive)
+          VERSIONS_IN_RANGE=$(echo "$ALL_VERSIONS" | awk \
+            -v prev="$PREVIOUS" -v curr="$CURRENT" \
+            'BEGIN{found=(prev=="")} $0==prev{found=1; next} found{print; if($0==curr) exit}')
+
+          if [[ -z "$VERSIONS_IN_RANGE" ]]; then
+            echo "No versions found in range, skipping"
+            exit 0
+          fi
+
+          # Fetch and concatenate release notes for each version in range (newest first)
+          NOTES_COMBINED=""
+          while IFS= read -r version; do
+            [[ -z "$version" ]] && continue
+            release=$(gh api "repos/jellyfin/jellyfin/releases/tags/v${version}" 2>/dev/null || echo "")
+            [[ -z "$release" ]] && continue
+            body=$(echo "$release" | jq -r '.body' | tr -d '\r')
+            url=$(echo "$release" | jq -r '.html_url')
+            [[ -z "$body" ]] && continue
+            shifted="$(sed "0,/^# /s|^# \(.*\)|# [\1](${url})|" <<< "$body")"
+            shifted="$(sed 's/^#/###/' <<< "$shifted")"
+            NOTES_COMBINED="$(printf '%s\n\n%s' "$NOTES_COMBINED" "$shifted")"
+          done <<< "$(sort -V -r <<< "$VERSIONS_IN_RANGE")"
+
+          if [[ -z "$NOTES_COMBINED" ]]; then
+            echo "No release notes found for any version in range, skipping"
+            exit 0
+          fi
+
+          # Append to the release-please PR body
+          CURRENT_BODY=$(gh pr view "$PR_NUMBER" --json body --jq '.body')
+          NEW_BODY="$(printf '%s\n\n%s' "$CURRENT_BODY" "$NOTES_COMBINED")"
+          gh pr edit "$PR_NUMBER" --body "$NEW_BODY"
