@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.1.0](https://github.com/mdvorak/ha-addon-jellyfin/compare/v2.0.8...v2.1.0) (2026-04-06)
+
+
+### Features
+
+* migrate to new home-assistant/builder actions pattern ([6dfb78d](https://github.com/mdvorak/ha-addon-jellyfin/commit/6dfb78dae6348e8b3d398064e88a267d2a1dc8d1))
+
+
+### Bug Fixes
+
+* **deps:** bump jellyfin/jellyfin in /jellyfin-server ([6a38b89](https://github.com/mdvorak/ha-addon-jellyfin/commit/6a38b89026f424f09be222ab7a78f6869584ab9c))
+* push backward-compat arch-suffixed image aliases ([4a7a622](https://github.com/mdvorak/ha-addon-jellyfin/commit/4a7a622c118f409b32053bfa4b607376117ba66e))
+
 ## [2.0.8](https://github.com/mdvorak/ha-addon-jellyfin/compare/v2.0.7...v2.0.8) (2026-04-06)
 
 
