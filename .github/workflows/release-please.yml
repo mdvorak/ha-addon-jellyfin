@@ -32,11 +32,12 @@ jobs:
           config-file: .github/release-please-config.json
 
       - name: Append Jellyfin release notes to PR
-        if: steps.release.outputs.pr != ''
+        if: steps.release.outputs.prs_created == 'true'
         env:
           GH_TOKEN: ${{ secrets.RELEASE_GITHUB_TOKEN }}
-          PR_NUMBER: ${{ fromJSON(steps.release.outputs.pr).number }}
+          PR_JSON: ${{ steps.release.outputs.pr }}
         run: |
+          PR_NUMBER=$(echo "$PR_JSON" | jq -r '.number')
           # Current Jellyfin version in Dockerfile
           CURRENT=$(grep -m1 '^FROM jellyfin/jellyfin:' jellyfin-server/Dockerfile | cut -d: -f2)
 
@@ -74,12 +75,15 @@ jobs:
           NOTES_COMBINED=""
           while IFS= read -r version; do
             [[ -z "$version" ]] && continue
+            # Fetch the GitHub release; silently skip if the tag doesn't exist yet
             release=$(gh api "repos/jellyfin/jellyfin/releases/tags/v${version}" 2>/dev/null || echo "")
             [[ -z "$release" ]] && continue
-            body=$(echo "$release" | jq -r '.body' | tr -d '\r')
+            body=$(echo "$release" | jq -r '.body' | tr -d '\r')  # strip Windows line endings
             url=$(echo "$release" | jq -r '.html_url')
             [[ -z "$body" ]] && continue
+            # Linkify the first top-level heading (the release title) with the release URL
             shifted="$(sed "0,/^# /s|^# \(.*\)|# [\1](${url})|" <<< "$body")"
+            # Demote all headings by two levels so they nest under our PR-level headings
             shifted="$(sed 's/^#/###/' <<< "$shifted")"
             NOTES_COMBINED="$(printf '%s\n\n%s' "$NOTES_COMBINED" "$shifted")"
           done <<< "$(sort -V -r <<< "$VERSIONS_IN_RANGE")"
