@@ -4,9 +4,13 @@ updates:
     directory: "/"
     schedule:
       interval: daily
+    groups:
+      home-assistant-builder:
+        patterns:
+          - "home-assistant/builder"
 
   - package-ecosystem: "docker"
-    directory: "/"
+    directory: "/jellyfin-server"
     schedule:
       interval: daily
     commit-message:
