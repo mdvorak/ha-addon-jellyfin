@@ -110,3 +110,24 @@ jobs:
           image-name: jellyfin-server
           image-tags: ${{ needs.init.outputs.tags }}
           container-registry-password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push backward-compat aliases
+        env:
+          TAGS: ${{ needs.init.outputs.tags }}
+          OWNER: ${{ github.repository_owner }}
+        run: |
+          while IFS= read -r tag; do
+            [[ -z "$tag" ]] && continue
+            for arch in amd64 aarch64; do
+              docker buildx imagetools create \
+                --tag "ghcr.io/${OWNER}/jellyfin-server-${arch}:${tag}" \
+                "ghcr.io/${OWNER}/${arch}-jellyfin-server:${tag}"
+            done
+          done <<< "$TAGS"
