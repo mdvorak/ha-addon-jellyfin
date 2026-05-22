@@ -93,7 +93,16 @@ jobs:
             exit 0
           fi
 
-          # Append to the release-please PR body
+          # Append to the release-please PR body. Strip the release-please
+          # footer first — anything below the trailing `---` gets wiped on
+          # the next release-please sync.
           CURRENT_BODY=$(gh pr view "$PR_NUMBER" --json body --jq '.body')
+          CURRENT_BODY=$(awk '
+            { lines[NR] = $0; if ($0 == "---") last = NR }
+            END {
+              end = last ? last - 1 : NR
+              for (i = 1; i <= end; i++) print lines[i]
+            }
+          ' <<< "$CURRENT_BODY")
           NEW_BODY="$(printf '%s\n\n%s' "$CURRENT_BODY" "$NOTES_COMBINED")"
           gh pr edit "$PR_NUMBER" --body "$NEW_BODY"
