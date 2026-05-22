@@ -10,7 +10,7 @@
 
 ## [2.1.0](https://github.com/mdvorak/ha-addon-jellyfin/compare/v2.0.8...v2.1.0) (2026-04-06)
 
-### [:rocket: Jellyfin Server 10.11.9](https://github.com/jellyfin/jellyfin/releases/tag/v10.11.9)
+### [Jellyfin Server 10.11.9](https://github.com/jellyfin/jellyfin/releases/tag/v10.11.9)
 
 We are pleased to announce the latest stable release of Jellyfin, version 10.11.9! This minor release brings several bugfixes to improve your Jellyfin experience. As always, please ensure you take a full backup before upgrading!
 
@@ -35,7 +35,7 @@ You can find more details about and discuss this release [on our forums](https:/
 * **deps:** bump jellyfin/jellyfin in /jellyfin-server to 10.11.8 ([6a38b89](https://github.com/mdvorak/ha-addon-jellyfin/commit/6a38b89026f424f09be222ab7a78f6869584ab9c))
 * push backward-compat arch-suffixed image aliases ([4a7a622](https://github.com/mdvorak/ha-addon-jellyfin/commit/4a7a622c118f409b32053bfa4b607376117ba66e))
 
-### [:rocket: Jellyfin Server 10.11.8](https://github.com/jellyfin/jellyfin/releases/tag/v10.11.8)
+### [Jellyfin Server 10.11.8](https://github.com/jellyfin/jellyfin/releases/tag/v10.11.8)
 
 We are pleased to announce the latest stable release of Jellyfin, version 10.11.8! This minor release brings several bugfixes to improve your Jellyfin experience. As always, please ensure you take a full backup before upgrading!
 
@@ -58,7 +58,7 @@ You can find more details about and discuss this release [on our forums](https:/
 
 * **deps:** bump jellyfin/jellyfin from 10.11.6 to 10.11.7 ([fe4818c](https://github.com/mdvorak/ha-addon-jellyfin/commit/fe4818c2624f7926e7a0de1cf80c6671afe36603))
 
-### [:rocket: Jellyfin Server 10.11.7](https://github.com/jellyfin/jellyfin/releases/tag/v10.11.7)
+### [Jellyfin Server 10.11.7](https://github.com/jellyfin/jellyfin/releases/tag/v10.11.7)
 
 We are pleased to announce the latest stable release of Jellyfin, version 10.11.7! This minor release brings several bugfixes to improve your Jellyfin experience. As always, please ensure you take a full backup before upgrading!
 

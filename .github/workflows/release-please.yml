@@ -81,6 +81,8 @@ jobs:
             body=$(echo "$release" | jq -r '.body' | tr -d '\r')  # strip Windows line endings
             url=$(echo "$release" | jq -r '.html_url')
             [[ -z "$body" ]] && continue
+            # Strip :rocket: emoji from release title
+            body="$(sed 's/:rocket: //g' <<< "$body")"
             # Linkify the first top-level heading (the release title) with the release URL
             shifted="$(sed "0,/^# /s|^# \(.*\)|# [\1](${url})|" <<< "$body")"
             # Demote all headings by two levels so they nest under our PR-level headings
