@@ -83,6 +83,8 @@ jobs:
             [[ -z "$body" ]] && continue
             # Strip :rocket: emoji from release title
             body="$(sed 's/:rocket: //g' <<< "$body")"
+            # Strip @ prefix from name references
+            body="$(sed 's/@\([a-zA-Z0-9_-]*\)/\1/g' <<< "$body")"
             # Linkify the first top-level heading (the release title) with the release URL
             shifted="$(sed "0,/^# /s|^# \(.*\)|# [\1](${url})|" <<< "$body")"
             # Demote all headings by two levels so they nest under our PR-level headings
