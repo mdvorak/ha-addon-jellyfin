@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.2](https://github.com/mdvorak/ha-addon-jellyfin/compare/v2.1.1...v2.1.2) (2026-05-25)
+
+
+### Bug Fixes
+
+* **deps:** bump jellyfin/jellyfin in /jellyfin-server ([d126ec0](https://github.com/mdvorak/ha-addon-jellyfin/commit/d126ec09381e042ff0e0666327529d1c53fd38d3))
+
 ## [2.1.1](https://github.com/mdvorak/ha-addon-jellyfin/compare/v2.1.0...v2.1.1) (2026-05-22)
 
 
