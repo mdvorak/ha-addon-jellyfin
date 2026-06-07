@@ -6,16 +6,15 @@ on:
 
 permissions:
   contents: write
-  issues: write
   pull-requests: write
 
-name: release-please
+name: release
 
 concurrency:
-  group: release-please
+  group: release
 
 jobs:
-  release-please:
+  release:
     runs-on: ubuntu-latest
     environment: release
     steps:
@@ -24,20 +23,40 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.RELEASE_GITHUB_TOKEN }}
 
-      - name: Run release-please
-        id: release
-        uses: googleapis/release-please-action@v5
+      - name: Publish Release
+        uses: robgonnella/releasaurus/action@v0.20.4
         with:
-          token: ${{ secrets.RELEASE_GITHUB_TOKEN }}
-          config-file: .github/release-please-config.json
+          command: release
+          command_args: --repo ${{ github.server_url }}/${{ github.repository }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_GITHUB_TOKEN }}
+
+      - name: Create/Update Release PR
+        uses: robgonnella/releasaurus/action@v0.20.4
+        with:
+          command: release-pr
+          command_args: --repo ${{ github.server_url }}/${{ github.repository }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_GITHUB_TOKEN }}
 
       - name: Append Jellyfin release notes to PR
-        if: steps.release.outputs.prs_created == 'true'
         env:
           GH_TOKEN: ${{ secrets.RELEASE_GITHUB_TOKEN }}
-          PR_JSON: ${{ steps.release.outputs.pr }}
         run: |
-          PR_NUMBER=$(echo "$PR_JSON" | jq -r '.number')
+          PR_NUMBER=$(gh pr list \
+            --head releasaurus-release-main \
+            --base main \
+            --state open \
+            --json number \
+            --jq '.[0].number // empty')
+
+          if [[ -z "$PR_NUMBER" ]]; then
+            echo "No open releasaurus release PR found, skipping"
+            exit 0
+          fi
+
+          echo "Found release PR #${PR_NUMBER}"
+
           # Current Jellyfin version in Dockerfile
           CURRENT=$(grep -m1 '^FROM jellyfin/jellyfin:' jellyfin-server/Dockerfile | cut -d: -f2)
 
@@ -99,16 +118,34 @@ jobs:
             exit 0
           fi
 
-          # Append to the release-please PR body. Strip the release-please
-          # footer first — anything below the trailing `---` gets wiped on
-          # the next release-please sync.
-          CURRENT_BODY=$(gh pr view "$PR_NUMBER" --json body --jq '.body')
-          CURRENT_BODY=$(awk '
-            { lines[NR] = $0; if ($0 == "---") last = NR }
-            END {
-              end = last ? last - 1 : NR
-              for (i = 1; i <= end; i++) print lines[i]
-            }
-          ' <<< "$CURRENT_BODY")
-          NEW_BODY="$(printf '%s\n\n%s' "$CURRENT_BODY" "$NOTES_COMBINED")"
-          gh pr edit "$PR_NUMBER" --body "$NEW_BODY"
+          # Write notes to temp file to avoid shell-escaping issues
+          printf '%s' "$NOTES_COMBINED" > /tmp/jellyfin_notes.md
+          gh pr view "$PR_NUMBER" --json body --jq '.body' > /tmp/pr_body.txt
+
+          # Update the persistent footer div in the releasaurus PR body
+          python3 - <<'PYEOF'
+import re
+
+with open('/tmp/pr_body.txt') as f:
+    body = f.read()
+with open('/tmp/jellyfin_notes.md') as f:
+    notes = f.read().strip()
+
+div_id = 'jellyfin-server-footer'
+new_footer = f'<div id="{div_id}">\n\n{notes}\n\n</div>'
+pattern = re.compile(
+    r'<div\s+id=["\']' + re.escape(div_id) + r'["\']>.*?</div>',
+    re.DOTALL
+)
+if pattern.search(body):
+    updated = pattern.sub(new_footer, body)
+    print('Replaced footer div.')
+else:
+    updated = body.rstrip() + '\n\n' + new_footer + '\n'
+    print('Appended footer div.')
+
+with open('/tmp/pr_body_new.txt', 'w') as f:
+    f.write(updated)
+PYEOF
+
+          gh pr edit "$PR_NUMBER" --body-file /tmp/pr_body_new.txt

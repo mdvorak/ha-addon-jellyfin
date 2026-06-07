@@ -1,0 +1,12 @@
+[changelog]
+skip_ci = true
+skip_chore = true
+
+[[package]]
+name = "jellyfin-server"
+path = "."
+release_type = "generic"
+additional_manifest_files = [
+  { path = "jellyfin-server/config.yaml", version_regex = 'version:\s+(?<version>\d+\.\d+\.\d+)' },
+  { path = "jellyfin-server-hn/config.yaml", version_regex = 'version:\s+(?<version>\d+\.\d+\.\d+)' },
+]
