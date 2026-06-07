@@ -123,29 +123,18 @@ jobs:
           gh pr view "$PR_NUMBER" --json body --jq '.body' > /tmp/pr_body.txt
 
           # Update the persistent footer div in the releasaurus PR body
-          python3 - <<'PYEOF'
-import re
-
-with open('/tmp/pr_body.txt') as f:
-    body = f.read()
-with open('/tmp/jellyfin_notes.md') as f:
-    notes = f.read().strip()
-
-div_id = 'jellyfin-server-footer'
-new_footer = f'<div id="{div_id}">\n\n{notes}\n\n</div>'
-pattern = re.compile(
-    r'<div\s+id=["\']' + re.escape(div_id) + r'["\']>.*?</div>',
-    re.DOTALL
-)
-if pattern.search(body):
-    updated = pattern.sub(new_footer, body)
-    print('Replaced footer div.')
-else:
-    updated = body.rstrip() + '\n\n' + new_footer + '\n'
-    print('Appended footer div.')
-
-with open('/tmp/pr_body_new.txt', 'w') as f:
-    f.write(updated)
-PYEOF
+          python3 .github/workflows/jellyfin_notes_pr.py
 
           gh pr edit "$PR_NUMBER" --body-file /tmp/pr_body_new.txt
+
+          # Also inject Jellyfin notes into CHANGELOG.md on the release branch
+          git fetch origin releasaurus-release-main
+          git checkout -B releasaurus-release-main origin/releasaurus-release-main
+
+          python3 .github/workflows/jellyfin_notes_changelog.py
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add CHANGELOG.md
+          git commit -m "docs(changelog): add Jellyfin upstream release notes"
+          git push origin releasaurus-release-main

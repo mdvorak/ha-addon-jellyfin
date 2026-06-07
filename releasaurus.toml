@@ -1,6 +1,7 @@
 [changelog]
 skip_ci = true
 skip_chore = true
+skip_doc = true
 
 [[package]]
 name = "jellyfin-server"
