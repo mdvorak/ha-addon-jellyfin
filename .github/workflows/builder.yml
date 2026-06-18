@@ -27,7 +27,7 @@ jobs:
       push: ${{ steps.meta.outputs.push }}
     steps:
       - name: Check out repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Determine version and tags
         id: meta
@@ -81,7 +81,7 @@ jobs:
       matrix: ${{ fromJSON(needs.init.outputs.matrix) }}
     steps:
       - name: Check out repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Build jellyfin-server add-on
         uses: home-assistant/builder/actions/build-image@2026.06.0
