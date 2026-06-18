@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.4](https://github.com/mdvorak/ha-addon-jellyfin/compare/v2.1.3...v2.1.4) (2026-06-18)
+
+
+### Bug Fixes
+
+* **deps:** bump actions/checkout from 6 to 7 ([bb5696f](https://github.com/mdvorak/ha-addon-jellyfin/commit/bb5696fd2a50a432c7fc149d66ca7044c58dcd24))
+* **deps:** bump home-assistant/builder ([b37a4ee](https://github.com/mdvorak/ha-addon-jellyfin/commit/b37a4eec9713ca1f11127f6c958aa2589b083b9e))
+
 ## [2.1.3](https://github.com/mdvorak/ha-addon-jellyfin/compare/v2.1.2...v2.1.3) (2026-06-07)
 
 
