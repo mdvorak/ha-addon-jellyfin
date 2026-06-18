@@ -8,7 +8,9 @@ updates:
       home-assistant-builder:
         patterns:
           - "home-assistant/builder"
-
+    commit-message:
+      prefix: "chore(deps)"
+      
   - package-ecosystem: "docker"
     directory: "/jellyfin-server"
     schedule:
