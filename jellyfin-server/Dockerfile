@@ -1,5 +1,5 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-dockerfile
-FROM jellyfin/jellyfin:12.1.20260915-010956
+FROM jellyfin/jellyfin:12.2.20261005-225228
 
 ENV JELLYFIN_DATA_DIR=/share/jellyfin
 ENV JELLYFIN_CONFIG_DIR=/share/jellyfin/config
