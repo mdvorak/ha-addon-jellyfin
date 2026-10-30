@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.8](https://github.com/mdvorak/ha-addon-jellyfin/compare/v2.1.7...v2.1.8) (2026-10-30)
+
+
+### Bug Fixes
+
+* **deps:** bump jellyfin/jellyfin to 12.4.20261026-211555 ([d5d65a2](https://github.com/mdvorak/ha-addon-jellyfin/commit/d5d65a297e94975ecaa655b09093e5d47b5b02be))
+
 ## [2.1.7](https://github.com/mdvorak/ha-addon-jellyfin/compare/v2.1.6...v2.1.7) (2026-10-26)
 
 
